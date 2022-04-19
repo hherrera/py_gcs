@@ -2,3 +2,5 @@ venv
 sifinca-*.json
 __pycache__
 .env
+services/__pycache__
+.DS_Store
