@@ -7,7 +7,7 @@ def get_list_blobs(bucket_name):
    
     return iterator
 
-def delete(bucket_name, object_name):
+def del_blob(bucket_name, object_name):
         """
         Deletes an object from the bucket.
 
