@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sifinca-1329",
+  "private_key_id": "e9d684cdecc4de00cb9e50fa5dc4f4ae42202855",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDNPr3csPpoAEyS\ntnZyAhKECW6pyEzwqbDUf44en5sWv4V2de0gWyuq0g38ZDzt0KYA0tSLhd3D1lFB\nHkjPmQBlS6Mn8JrqL8jV3FPUzjZZT47viLLq+gxeZQv+wwf+Ar1TlWwG/u4jVgd1\nhh9HOtnh0YTBAjXJCt2yAbozYIWgrHOvdbUOfNIrK9oyLQMaY3odAgRsazkeJ7aB\nQqW1UO0uMohVnwcDtTFADd24g+fSdJlg3om8+lvwz0HZ1JthPynYIxEZwlrxwnbM\n/hcpiL/CHX2tWjqLmzEbTcFI//IIhA0yk3ay7hiWuNkXjmui431VKIQDR+GtLGdv\nkxGXg36PAgMBAAECggEAJS7ltLK3WtobBUVbJgJsGlGfI9Eu5zbG22iUdcXSkgd2\nhWSN5hu+SH8vm3cJdsgjGukXKoPBDnaoV9TFuh5s7O0MDPNRDXZEu0HkShxlyj5Y\nldq9F0bfsMY7qxboPsN+S0M5w/axa+NtDISU7BGkYX3UwCbHWbnHOjWH50DoVJg2\nTpFX6t9fNfohSYhvtrBIGTip35Mde13WjoO7L27utkBlfQVmBjdkNZ0aKsdcyOoF\nwS6Pd6wPfB2l/6eGdKX5lvkChkkij6cXoEeXv+cPowRQvmJpyPH78ttzrRimgOpM\nSF+mMSz0Kahn1pwx6MKxWPkijc174+NBYQpBjSBE4QKBgQD0h8kmj1wg+Tg56I9d\nJYKJqOHQAMH0Q5EqeN847c/kOKiKOEcptryntsCKtH2QcAF5E4CRTod7xX9uBtL6\nqRdJi+K8K4pSNvwyOJ3lS29PKfARAOzNrW614JdhhMn3JGDGxgHdxxufBSUXE4aP\nTT5MokAIQkygSy5Z2QZ/mG+1HwKBgQDW3zwf1pM0IXinsMAkMlRBQWAGXCihtX7P\nNfwbymmNJh1kkOTVLiaE0HLICF5odJDHyamYIfVn36ZJZIkNqn9/QCRxJfDy9P+B\n+pKa4hIea/ozEU94/9CRHiJ+XzsvXBa+WzwX/K4dZslvdNF+LSPGjwT0b17KP1F9\njPvQpV0YkQKBgGUsuYGG12udMjJjks3Lc1NZ2PSjG5zhR/L2yAVaACZBexqVZnxP\n64bJCqlZPIrCjRl3hD6a61u+v5bao/iqdcQsaMfKjBSwQ3DUFCCHMarjgzzF0TTY\niXIfVwM2WgoztwcHbkZA16DYFByUK5ynLRuwFiZUqDe6Y5cxQIsSm0WpAoGAQSSq\n2Mg4FrzzFHvstMyhaKtGTodQNj6NNIscZNyIBagBj0Sya8MzIF8F/Ykz/h0g68FC\n7oGVIinXAzc8qez//HdY1Qj4tN/8Os7Z9aUGczyvPR5JZti/xc9KC+AZVHFp38pP\nPMJ5kyZfebAD92n+B6vCh8zgAxcRQKwmiAoqYFECgYEAwdiy4DBNgZgUfGRgQp6m\nt0xCluhT/b688qas4Ub48EGV7k9XTkAVr6eR7W4PzUbfKQE1YhM2wSiCOPhWDplf\noSmV01uxNKht/HKsLf2JatG3ve7JTWzJIpnN59kqO7Dpb/T19hklB4Qycq0f7xan\nxIrVTzD+H50fY0NqbZzRKQE=\n-----END PRIVATE KEY-----\n",
+  "client_email": "gcloud-storage-894@sifinca-1329.iam.gserviceaccount.com",
+  "client_id": "101339173100445583058",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/gcloud-storage-894%40sifinca-1329.iam.gserviceaccount.com"
+}
