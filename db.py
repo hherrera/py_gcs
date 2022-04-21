@@ -5,19 +5,19 @@ import psycopg2.extras
 import sys
 import os
 
-def get_conn():
+def get_conn(db):
     conn= psycopg2.connect(user=os.getenv('USER'),
                                   password=os.getenv('PASSWORD'),
                                   host=os.getenv('HOST'),
                                   port=os.getenv('PORT'),
-                                  database=os.getenv('DATABASE'))
+                                  database=db)
 
     
     return conn
 
 
 
-def get_file(name : str,conn):
+def get_file(name:str,conn):
     
     """ Query file from the 'arc_file' table for name"""
     try:
@@ -63,10 +63,10 @@ def get_allfiles(conn):
 
 if __name__=='__main__':
     load_dotenv()
-    conn=get_conn()
+    conn=get_conn('sifincactg')
     files= get_allfiles(conn)
     path = '/tmp/phpKaROgw'
-    #res = next(filter(lambda x: x[1]==path,files))
+    
     res = next((x for x in files if x[1] == path), None)
    
     print(res)

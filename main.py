@@ -1,8 +1,6 @@
-from webbrowser import get
 from dotenv import load_dotenv
-from pkg_resources import resource_string
-from services.gcs  import  list_blobs, del_blob, mv_blob, blob_metadata
-from db import  get_file,get_allfiles, get_conn
+from services.gcs  import  list_blobs, mv_blob
+from db import get_allfiles, get_conn
 
 def main():
     # load .env
@@ -15,11 +13,11 @@ def main():
     #return 
     #del_blob('sifinca-demo','/tmp/fondo.jpg')
     fd='/recycled-bin/'
-    #mv_blob('sifinca-demo', '/tmp/php0Hi9Se','sifinca-demo',fd+'php0Hi9Se' )
+    mv_blob('sifinca-demo', '/tmp/php0Hi9Se','sifinca-demo',fd+'php0Hi9Se' )
     
    
     print(f'Cargando todos los blobs de {bucket_name}')
-    blobs = get_list_blobs(bucket_name)
+    blobs = list_blobs(bucket_name)
      #buscar blob en la base de datos 
    
     conn = get_conn()
