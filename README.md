@@ -1,13 +1,20 @@
-# py_gcs
+## Install
 
-- Crear virtualenv
+1. Create virtual envioroment
+$ virtualenv venv
 
-$virtualenv venv 
--- Activarlo
-$ bash ./venv/bin/activate
+2. Install dependencies
 
-$ pip freeze > requirements.txt
-
--Install packs
 $ pip install -r requirements.txt
+
+
+3. Active virtual env
+$ source venv/bin/activate
+
+# copy to root directory the file .json key of google gloud service account
+
+
+# Create alias command
+$  python setup.py develop  
+
 

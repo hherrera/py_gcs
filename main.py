@@ -1,64 +1,63 @@
-from dotenv import load_dotenv
-from services.gcs  import  list_blobs, mv_blob
-from db import get_allfiles, get_conn
+import typer
+import datetime
+from typing import Optional
+import time
+from cli.debug_blob import debug_blob
+from config.settings import settings
+from cli.download import download_blob_id
+# manejador de comandos
+app = typer.Typer()
 
-def main():
-    # load .env
-    bucket_name ='sifinca-files'
-    load_dotenv()
+@app.command()
+def purge_blobs(
+    bucket_name : str= typer.Argument(..., help="Nombre del Bucket en Google Storage"),
+    db_name : str ='sifincactg' , 
+    bucket_name_dest : str = settings.BUCKET_NAME_DEST, 
+    export : bool =True , 
+    limit : int = 0 ,
+    pretend : bool = True
+    ):
+    """
+    Elimina los archivos de BUCKET_NAME, que no este en la base datos.
 
-    #d=get_blob_metadata( bucket_name , '/tmp/php0IDtxE')
-    #print(d.size)
-
-    #return 
-    #del_blob('sifinca-demo','/tmp/fondo.jpg')
-    fd='/recycled-bin/'
-    mv_blob('sifinca-demo', '/tmp/php0Hi9Se','sifinca-demo',fd+'php0Hi9Se' )
-    
+    Los archivos quedaran almacenados en el bucket 'sifinca-backups'  en la carpeta 'recycled-bin' .
+    """
+    basename = "notfound"
+    suffix = datetime.datetime.now().strftime("%y%m%d_%H%M%S")
+    export_file_name = "_".join([basename, suffix,'.txt']) # e.g. 'mylogfile_120508_171442'
+   # int time
+    inicio = time.time()
    
-    print(f'Cargando todos los blobs de {bucket_name}')
-    blobs = list_blobs(bucket_name)
-     #buscar blob en la base de datos 
+    nofound,n,size =debug_blob(db_name, bucket_name,bucket_name_dest ,settings.FOLDER_DEST,limit,pretend)
    
-    conn = get_conn()
-    print(f'Cargando todos los path de la basedatos')
-    files=get_allfiles(conn)
-    n=0
-    size=0
-    nofound=[]
-    for blob in blobs:
-        n += 1 
-        
-        print(f'[{n}]Procesando blob {blob.name}')
-
-        file = next((x for x in files if x[1] == blob.name), None)
-         # Not found file - erase o move blob
-        if file is None:
-            print(f'{blob.name} no fue encontrado')
-            nofound.append(blob.name)
-
-            f= blob.name.split('/')  
-            dest= fd+f[len(f)-1]              
-            
-            #mv_blob(bucket_name, blob.name,bucket_name,dest )
-            print(f'{blob.name} fue movido a {dest}')
-            size+=blob.size 
-        else:
-            print(f" --- > ID: {file[0]} / Path: {file[1]}")
-        
-        if n==1000:
-            break
-
-        
-   
+   # end time  
+    fin = time.time() 
+    duracion= fin - inicio
+    typer.echo(f"=======================================")
+    typer.echo(f"Tiempo en segundos: {duracion}")
+    typer.echo(f"=======================================")
+    typer.echo(f"Blobs recorridos en {bucket_name}: {n}")
+    t= round(size/(1024*1024),0)
+    typer.echo(f"# Enviados a {settings.FOLDER_DEST}: {len(nofound)}")
+    typer.echo(f"Espacio recuperado :{t} MB")
+    typer.echo(f"=======================================")
+    # enviar archivo .csv
   
-    t= size/(1024*1024)
-    print(f"# archivos no encontrados: {len(nofound)}")
-    print(f" Espacio salvado :{t} MB")
-    print(f"=======================================")
-    print(nofound)
+    if export:
+        with open(export_file_name, 'w') as f:
+            for l in nofound:
+                f.write(l+'\n')
 
- 
+@app.command()
+def download(id:str, destination_filename : Optional[str] = typer.Argument(None)):
+
+
+    dest = download_blob_id(id,destination_filename)
+    typer.echo(f'Archivo id {id} descargado en {dest}')
+
+
 if __name__=='__main__':
-    main()
+   app()
+
+
 
