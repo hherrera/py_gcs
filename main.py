@@ -14,10 +14,11 @@ def purge_blobs(
     bucket_name_dest : str = settings.BUCKET_NAME_DEST, 
     export : bool =True , 
     export_file_name : str = 'notfound.txt', 
-    limit : int = 0 
+    limit : int = 0 ,
+    pretend : bool = True
     ):
     """
-    Elimina los archivos de NAME, que no este en la base datos.
+    Elimina los archivos de BUCKET_NAME, que no este en la base datos.
 
     Los archivos quedaran almacenados en el bucket 'sifinca-backups'  en la carpeta 'recycled-bin' .
     """
@@ -25,7 +26,7 @@ def purge_blobs(
    # int time
     inicio = time.time()
    
-    nofound,n,size =debug_blob(db_name, bucket_name,bucket_name_dest ,settings.FOLDER_DEST,limit)
+    nofound,n,size =debug_blob(db_name, bucket_name,bucket_name_dest ,settings.FOLDER_DEST,limit,pretend)
    
    # end time  
     fin = time.time() 

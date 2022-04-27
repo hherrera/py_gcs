@@ -33,5 +33,5 @@ def download_blob_id(id:str, dest :str =None):
 
 if __name__=='__main__':
     pass
-    #download('ac79f947-133b-4e92-afd9-3914a343dfbe')
-    #download('e6e81268-a058-40a6-abf1-3d3a1260f5b9')
+    download('ac79f947-133b-4e92-afd9-3914a343dfbe')
+    download('e6e81268-a058-40a6-abf1-3d3a1260f5b9')

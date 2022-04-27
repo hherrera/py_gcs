@@ -4,7 +4,7 @@ from config.settings import settings
 from services.gcs  import  list_blobs, mv_blob
 from services.db import get_allfiles,get_file, get_conn
 
-def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0):
+def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0, pretend =True):
     n=0
     size=0
     nofound=[]
@@ -33,11 +33,13 @@ def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0):
             f= blob.name.split('/')  
             dest= folder_dest+'/'+f[len(f)-1]              
             
-            mv_blob(bucket_name, blob.name,bucket_name_dest,dest )
-            print(f'{blob.name} fue movido a {dest}')
+            ### validate pretend
+            if not pretend:
+                mv_blob(bucket_name, blob.name,bucket_name_dest,dest )
+                print(f'{blob.name} fue movido a {dest}')
             size+=blob.size 
         else:
-            print(f" --- > ID: {file[0]} / Path: {file[1]}")
+            print(f" --- > Id: {file[0]} / Path: {file[1]}")
         if limit:
             if n==limit:
                 break
