@@ -36,7 +36,7 @@ def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0, prete
             ### validate pretend
             if not pretend:
                 mv_blob(bucket_name, blob.name,bucket_name_dest,dest )
-                print(f'{blob.name} fue movido a {dest}')
+                print(f'{blob.name} fue movido a {bucket_name_dest}/{dest}')
             size+=blob.size 
         else:
             print(f" --- > Id: {file[0]} / Path: {file[1]}")

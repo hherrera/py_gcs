@@ -1,4 +1,5 @@
 import typer
+import datetime
 from typing import Optional
 import time
 from cli.debug_blob import debug_blob
@@ -13,7 +14,6 @@ def purge_blobs(
     db_name : str ='sifincactg' , 
     bucket_name_dest : str = settings.BUCKET_NAME_DEST, 
     export : bool =True , 
-    export_file_name : str = 'notfound.txt', 
     limit : int = 0 ,
     pretend : bool = True
     ):
@@ -22,7 +22,9 @@ def purge_blobs(
 
     Los archivos quedaran almacenados en el bucket 'sifinca-backups'  en la carpeta 'recycled-bin' .
     """
-     
+    basename = "notfound"
+    suffix = datetime.datetime.now().strftime("%y%m%d_%H%M%S")
+    export_file_name = "_".join([basename, suffix,'.txt']) # e.g. 'mylogfile_120508_171442'
    # int time
     inicio = time.time()
    
@@ -40,7 +42,9 @@ def purge_blobs(
     typer.echo(f"Espacio recuperado :{t} MB")
     typer.echo(f"=======================================")
     # enviar archivo .csv
-        
+  
+   
+
     if export:
         with open(export_file_name, 'w') as f:
             for l in nofound:
