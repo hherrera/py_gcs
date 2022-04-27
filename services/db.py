@@ -49,14 +49,15 @@ def get_file(name:str,conn):
     try:
         with conn.cursor(cursor_factory=psycopg2.extras.DictCursor) as cursor:
             params = (name,)
-            sql ="""select f.id, f.entrydate, f.hash, f.path,f.originalname, f.size,entity,f.entityid, c.format as ext, c.mimetype
+            sql ="""select f.id, f.entrydate, f.hash, f.path,f.originalname, 
+                    f.size,entity,f.entityid, c.format as ext, c.mimetype
                     from arc_file f
                     inner join arc_contenttype c on f.contenttype_id = c.id
                     where c.deleted= false and f.path = %s
                     """
             cursor.execute(sql,params)
             row = cursor.fetchone()
-            
+           
     
     except psycopg2.DatabaseError as e:
 
@@ -94,12 +95,12 @@ def get_allfiles(conn):
 if __name__=='__main__':
    
     conn=get_conn('sifincactg')
-    row= get_file('/tmp/php2tEtHq',conn)
+    #row= get_file('/tmp/php2tEtHq',conn)
 
-    #files = get_allfiles(conn)
-    #path = '/tmp/phpKaROgw'
+    files = get_allfiles(conn)
+    path = '/tmp/phpKaROgw'
     
-    #res = next((x for x in files if x[1] == path), None)
+    res = next((x for x in files if x[1] == path), None)
    
-    print(row)
+    print(res)
 
