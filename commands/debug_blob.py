@@ -80,7 +80,7 @@ def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0, prete
         n += 1 
         typer.echo(f'[{n}]Procesando blob {blob.name}')
 
-        file = next((x for x in files if x[1] == blob.name), None)
+        file = next((x for x in files if x['path'] == blob.name), None)
          # Not found file - erase o move blob
         if file is None:
             typer.echo(f'{blob.name} no fue encontrado')
@@ -95,7 +95,7 @@ def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0, prete
                 typer.echo(f'{blob.name} fue movido a {bucket_name_dest}/{dest}')
             size+=blob.size 
         else:
-            typer.echo(f" --- > Id: {file[0]} / Path: {file[1]}")
+            typer.echo(f" --- > Id: {file['id']} / Path: {file['path']}")
         if limit:
             if n==limit:
                 break
