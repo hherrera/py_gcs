@@ -3,7 +3,8 @@ import typer
 from config.settings import settings
 from services.gcs  import  list_blobs, mv_blob, del_blob
 from services.db import  get_conn
-from repositories.files import get_allfiles,
+from repositories.files import get_allfiles
+
 
 app=typer.Typer()
 
@@ -64,25 +65,25 @@ def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0, prete
     size=0
     nofound=[]
     
-    print(f'Cargando todos los blobs de {bucket_name}')
+    typer.echo(f'Cargando todos los blobs de {bucket_name}')
     blobs = list_blobs(bucket_name)
     
       #buscar blob en la base de datos 
-    print(f'Conectandose a {db_name}')
+    typer.echo(f'Conectandose a {db_name}')
     conn = get_conn(db_name)
     
-    print(f'Cargando datos de {db_name}...')
+    typer.echo(f'Cargando datos de {db_name}...')
     files=get_allfiles(conn)
     nreg = len(files)
     print(f'{nreg} registros cargados')
     for blob in blobs:
         n += 1 
-        print(f'[{n}]Procesando blob {blob.name}')
+        typer.echo(f'[{n}]Procesando blob {blob.name}')
 
         file = next((x for x in files if x[1] == blob.name), None)
          # Not found file - erase o move blob
         if file is None:
-            print(f'{blob.name} no fue encontrado')
+            typer.echo(f'{blob.name} no fue encontrado')
             nofound.append(blob.name)
 
             f= blob.name.split('/')  
@@ -91,10 +92,10 @@ def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0, prete
             ### validate pretend
             if not pretend:
                 mv_blob(bucket_name, blob.name,bucket_name_dest,dest )
-                print(f'{blob.name} fue movido a {bucket_name_dest}/{dest}')
+                typer.echo(f'{blob.name} fue movido a {bucket_name_dest}/{dest}')
             size+=blob.size 
         else:
-            print(f" --- > Id: {file[0]} / Path: {file[1]}")
+            typer.echo(f" --- > Id: {file[0]} / Path: {file[1]}")
         if limit:
             if n==limit:
                 break
