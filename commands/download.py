@@ -1,9 +1,8 @@
 import typer
 from typing import Optional
-
-from services.db import get_conn, get_file_id
+from repositories.files import get_file_id
 from services.gcs import download_blob
-
+from services.db import get_conn
 app=typer.Typer()
 
 @app.command()
