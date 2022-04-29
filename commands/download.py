@@ -1,19 +1,25 @@
-from services.db import get_conn, get_file_by_id
+import typer
+from typing import Optional
+
+from services.db import get_conn, get_file_id
 from services.gcs import download_blob
 
+app=typer.Typer()
 
-def download_blob_id(id:str, dest :str =None):
+@app.command()
+def download(id:str, destination_filename : Optional[str] = typer.Argument(None)):
+
 
     # buscar db cartagena 
     conn1 = get_conn('sifincactg')
-    file = get_file_by_id(id, conn1)
+    file = get_file_id(id, conn1)
     
     if not file:
         conn2 = get_conn('sifincamon')
-        file = get_file_by_id(id, conn2)
+        file = get_file_id(id, conn2)
         if not file:
             # no encontrado error 
-            print(f'ID no existe {id}')
+            typer.echo(f'ID no existe {id}')
         else:
             bucket_name ='monteria-files'
     # elseif monteria
@@ -24,13 +30,13 @@ def download_blob_id(id:str, dest :str =None):
     if  dest==None or dest=='':
         dest = file['originalname']
     path = file['path']
-    print(bucket_name,file['path'])
+    typer.echo(bucket_name,file['path'])
 
     download_blob(bucket_name, path, dest)
     
-    return dest
+    typer.echo(f'Archivo id {id} descargado en {dest}')
 
 
 if __name__=='__main__':
-    pass
+    app()
     

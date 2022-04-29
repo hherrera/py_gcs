@@ -23,10 +23,14 @@ def metadata_blob(bucket_name, object_name):
     return blob
 
 
-def list_blobs(bucket_name):
+
+def list_blobs(bucket_name, prefix=None):
     client = storage.Client()
     bucket = client.get_bucket(bucket_name)
-    iterator = bucket.list_blobs()
+    if prefix is None:
+        iterator = bucket.list_blobs()
+    else:
+        iterator = bucket.list_blobs(prefix=prefix)
    
     return iterator
 
