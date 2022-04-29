@@ -117,17 +117,5 @@ if __name__=='__main__':
 
 
 if __name__=='__main__':
-    from repositories.files  import get_file_id
-    from schemas.files import FileOut
-    conn= get_conn('sifincactg')
-    id ='7bd7893a-52fd-4a50-b923-fda367b71a61'
-    f = get_file_id(id,conn)
-
-    
-    file_dict = dict(f)
-    
-
-    record = FileOut(**file_dict)
-
-    print(record)
+   pass
 
