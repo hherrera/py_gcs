@@ -5,3 +5,4 @@ __pycache__
 services/__pycache__
 .DS_Store
 *.egg-info
+static/*
