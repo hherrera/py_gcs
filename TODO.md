@@ -1,13 +1,16 @@
 ### TODO
 
-1. delete branch master OK
-2. merge branch main (default) OK
+0. 1. cache - file
+0. 2. path parameters & query parameters
 
-3. clone project in server ssh hherrera@192.168.100.70 OK
-**********
 
-1. install fastapi
-2. refactor cli and app
+1. jwt
+
+2. cors
+
+3. cache - redis datos procesados
+
+4. 
 
 
 

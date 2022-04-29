@@ -15,5 +15,7 @@ class FileOut(BaseModel):
     entityid : Optional[str] = None
     ext : str
     mimetype : str
-
+    bucket : str
+    signed_url : str
+    public_url : str
 

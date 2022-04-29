@@ -3,7 +3,7 @@ from fastapi import APIRouter, HTTPException
 from fastapi.responses import FileResponse
 from services.db import get_conn
 from repositories.files import get_file_id
-from services.gcs import metadata_blob, download_blob
+from services.gcs import  download_blob
 router = APIRouter()
 
 

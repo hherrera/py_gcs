@@ -2,6 +2,8 @@ from http import client
 from google.cloud import storage
 from google.cloud import exceptions
 import json
+import datetime
+
 
 class NotFoundError(Exception):
   """Raised when a resource is not found."""
@@ -11,11 +13,34 @@ _GET_BLOB_ERROR_MSG = (
     'failed to retrieve Blob with name %r from Google Cloud Storage Bucket '
     '%r: %s')
 
+def public_url(bucket, path):
+    
+    gcs_url = 'https://%(bucket)s.storage.googleapis.com/%(file)s' % {'bucket':bucket, 'file':path}
+    return gcs_url
+
+def signed_url(blob, hours : int=1):
+    """Generates a v4 signed URL for downloading a blob.
+
+    Note that this method requires a service account key file. You can not use
+    this if you are using Application Default Credentials from Google Compute
+    Engine or from the Google Cloud SDK.
+    """
+    
+    url = blob.generate_signed_url(
+        version="v4",
+        # This URL is valid for 15 minutes
+        expiration=datetime.timedelta(hours=hours),
+        # Allow GET requests using this URL.
+        method="GET",
+    )
+
+    return url
+
 def metadata_blob(bucket_name, object_name):
     try:
       client = storage.Client()
       bucket = client.bucket(bucket_name)
-      blob =  blob = bucket.get_blob(object_name)
+      blob =  bucket.get_blob(object_name)
       
     except (AttributeError, exceptions.NotFound) as err:
       
