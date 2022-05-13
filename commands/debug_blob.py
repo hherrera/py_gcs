@@ -32,7 +32,6 @@ def purge_blobs(
     bucket_name : str= typer.Argument(..., help="Nombre del Bucket en Google Storage"),
     db_name : str ='sifincactg' , 
     bucket_name_dest : str = settings.BUCKET_NAME_DEST, 
-    export : bool =True , 
     limit : int = 10 ,
     pretend : bool = True
     ):
@@ -78,10 +77,7 @@ def purge_blobs(
     msg =f'Tiempo de {duracion}s procesando {n} blobs de bucket:{bucket_name} '
     msg +=f'\n  {len(nofound)} archivos enviados a {settings.FOLDER_DEST}, espacion en disco {t} '
     
-    if export:
-        with open(export_file_name, 'w') as f:
-            for l in nofound:
-                f.write(l+'\n')
+    
 
 
 def debug_blob(db_name, bucket_name,bucket_name_dest, folder_dest,limit=0, pretend =True):

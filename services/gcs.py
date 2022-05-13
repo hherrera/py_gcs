@@ -3,7 +3,7 @@ from google.cloud import storage
 from google.cloud import exceptions
 import json
 import datetime
-
+from config.handler_logging import logger
 
 class NotFoundError(Exception):
   """Raised when a resource is not found."""
@@ -42,8 +42,9 @@ def metadata_blob(bucket_name, object_name):
       blob =  bucket.get_blob(object_name)
       
     except (AttributeError, exceptions.NotFound) as err:
-      
-      raise NotFoundError(_GET_BLOB_ERROR_MSG % (object_name, bucket_name, err))
+     
+        logger.log_text(f'Error {err}', severity="ERROR")
+        raise NotFoundError(_GET_BLOB_ERROR_MSG % (object_name, bucket_name, err))
     return blob
 
 

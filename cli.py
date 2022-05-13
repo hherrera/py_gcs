@@ -16,7 +16,6 @@ app.add_typer(download.app, name="download")
 app.add_typer(debug_blob.app, name="debug_files")
 
 if __name__=='__main__':
-    
     app()
     
     
