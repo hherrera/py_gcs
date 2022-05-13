@@ -2,6 +2,8 @@ import psycopg2
 from psycopg2.extras import RealDictCursor
 
 from services.db import get_conn
+from config.handler_logging import logger
+
 
 def get_file_id(id:str,conn):
     psycopg2.extras.register_uuid()
@@ -19,8 +21,9 @@ def get_file_id(id:str,conn):
             row = cursor.fetchone()
             #row['id']= str(row['id']) -- esto antes de usar pydantic, typing como debe ser
     
-    except psycopg2.DatabaseError as e:
+    except (psycopg2.DatabaseError,psycopg2.OperationalError) as e:
         row=None ## responder Null
+        logger.log_text(f'Error {e}', severity="ERROR")
         if conn:
             conn.rollback()
         
@@ -47,13 +50,13 @@ def get_file(name:str,conn):
             row = cursor.fetchone()
            
     
-    except psycopg2.DatabaseError as e:
+    except (psycopg2.DatabaseError,psycopg2.OperationalError) as e:
 
         if conn:
             conn.rollback()
 
-        print(f'Error {e}')
-        sys.exit(1)
+        logger.log_text(f'Error {e}', severity="ERROR")
+        
 
     
     return row   
@@ -68,11 +71,11 @@ def get_allfiles(conn):
             row = cursor.fetchall()
             
     
-    except psycopg2.DatabaseError as e:
+    except (psycopg2.DatabaseError,psycopg2.OperationalError) as e:
 
         if conn:
             conn.rollback()
-
+        logger.log_text(f'Error {e}', severity="ERROR")
         
 
     

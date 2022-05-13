@@ -14,7 +14,6 @@ _GET_BLOB_ERROR_MSG = (
     '%r: %s')
 
 def public_url(bucket, path):
-    
     gcs_url = 'https://%(bucket)s.storage.googleapis.com/%(file)s' % {'bucket':bucket, 'file':path}
     return gcs_url
 

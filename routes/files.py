@@ -38,7 +38,8 @@ async def get_file_by_id(id:str):
         entity= file['entity'],
         entityid= file['entityid'], 
         ext= file['ext'], 
-        mimetype= file['mimetype']
+        mimetype= file['mimetype'],
+        bucket=bucket_name,signed_url=url1, public_url=url2
     )
     """
    

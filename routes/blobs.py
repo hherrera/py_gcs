@@ -23,6 +23,7 @@ async def get_blob_id(id : str):
     path = file['path']
     #blob = metadata_blob(bucket_name,path)
     file_path = 'static/'+str(file['id'])+'.'+file['ext']
+    
     download_blob(bucket_name,path,file_path)
 
     
